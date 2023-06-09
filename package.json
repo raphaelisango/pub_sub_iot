@@ -1,0 +1,27 @@
+{
+  "name": "pub_sub_iot",
+  "version": "1.0.0",
+  "type":"module",
+  "description": "publish and subscribe service only",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "amqplib": "^0.10.3",
+    "mosca": "^2.8.3",
+    "mqtt": "^3.0.0"
+  },
+  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raphaelisango/pub_sub_iot.git"
+  },
+  "author": "raphael isango",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raphaelisango/pub_sub_iot/issues"
+  },
+  "homepage": "https://github.com/raphaelisango/pub_sub_iot#readme"
+}
