@@ -15,7 +15,7 @@ class MQTTclass {
   On(event, obj) {
     switch (event) {
       case "connect":
-        this._connect(obj.channel, obj.data);
+        this._connect(obj.source, obj);
         return this;
 
       default:
@@ -25,17 +25,22 @@ class MQTTclass {
   }
   _connect(topic, message) {
     this.#i <= 0
-      ? console.log("CONNECTED TO " + `${this.#DOMAIN}:${this.#PORT}`)
+      ? console.log("CONNECTED TO " + `mqtt://${this.#DOMAIN}:${this.#PORT}`)
       : "";
+
     this.#i++;
 
-    this.#CLIENT = this.#MQtt.connect(`${this.#DOMAIN}:${this.#PORT}`);
+    this.#CLIENT = this.#MQtt.connect(`mqtt://${this.#DOMAIN}:${this.#PORT}`);
+    //console.log(this.#CLIENT);
     this.#CLIENT.on("connect", () => {
+      console.log("down", JSON.stringify(message));
       this.#CLIENT.publish(topic, JSON.stringify(message));
       //console.log(message);
-
-      console.log("PUBLISHED >>>> " + JSON.stringify(message));
     });
+  }
+  publish(message) {
+    this.#CLIENT.publish(message.source, JSON.stringify(message));
+    console.log("PUBLISHED >>>> " + JSON.stringify(message));
   }
 }
 

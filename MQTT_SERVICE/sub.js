@@ -12,7 +12,7 @@ class MQTTclass {
   On(event, obj) {
     switch (event) {
       case "connect":
-        this._connect(obj.channel);
+        this._connect(obj.topic);
         break;
       case "message":
         this._message(obj.OnMsgCallback);
@@ -24,8 +24,9 @@ class MQTTclass {
     return this;
   }
   _connect(topic) {
-    console.log("CONNECTED TO " + `${this.#DOMAIN}:${this.#PORT}`);
-    this.#CLIENT = this.#MQtt.connect(`${this.#DOMAIN}:${this.#PORT}`);
+    console.log(topic);
+    console.log("CONNECTED TO " + `mqtt://${this.#DOMAIN}:${this.#PORT}`);
+    this.#CLIENT = this.#MQtt.connect(`mqtt://${this.#DOMAIN}:${this.#PORT}`);
     this.#CLIENT.on("connect", () => {
       this.#CLIENT.subscribe(topic);
 
@@ -33,8 +34,8 @@ class MQTTclass {
     });
   }
   _message(OnMsgCallback) {
-    this.#CLIENT.on("message", (topic, message) => {
-      OnMsgCallback(topic, message);
+    this.#CLIENT.on("message", (channel, message) => {
+      OnMsgCallback(channel, message);
     });
   }
 }
