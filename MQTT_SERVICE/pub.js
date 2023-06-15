@@ -15,7 +15,7 @@ class MQTTclass {
   On(event, obj) {
     switch (event) {
       case "connect":
-        this._connect(obj.source, obj);
+        this._connect(obj.destination, obj);
         return this;
 
       default:
